@@ -71,7 +71,6 @@ public class ClinicDAO {
         }else{
             return null;
         }
-
     }
     public ArrayList<Clinic> get() throws SQLException {
         String sql ="select id ,name, specialty, address, phone, mobile, email, doctor_name from clinic";
