@@ -15,16 +15,16 @@ public class ClinicDAO {
     }
 
     public  void add(Clinic clinic) throws SQLException {
-        String sql ="insert into clinic (id,name, specialty, address, phone, mobile, email, doctor_name) values(?,?,?,?,?,?,?,?)";
+        String sql ="insert into clinic (name, specialty, address, phone, mobile, email, doctor_name) values(?,?,?,?,?,?,?)";
         PreparedStatement st = connection.prepareStatement(sql);
-        st.setInt(1,clinic.getId());
-        st.setString(2,clinic.getName());
-        st.setString(3,clinic.getSpecialty());
-        st.setString(4,clinic.getAddress());
-        st.setString(5,clinic.getPhone());
-        st.setString(6,clinic.getMobile());
-        st.setString(7,clinic.getEmail());
-        st.setString(8,clinic.getDoctorName());
+//        st.setInt(1,clinic.getId());
+        st.setString(1,clinic.getName());
+        st.setString(2,clinic.getSpecialty());
+        st.setString(3,clinic.getAddress());
+        st.setString(4,clinic.getPhone());
+        st.setString(5,clinic.getMobile());
+        st.setString(6,clinic.getEmail());
+        st.setString(7,clinic.getDoctorName());
         st.executeUpdate();
         st.close();
     }
