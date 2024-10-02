@@ -5,6 +5,9 @@ import db.dao.ClinicDAO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,13 +24,15 @@ public class ClinicFrame extends JFrame {
     private JTextField textFieldEmail;
     private JButton buttonSave;
     private JTextField textFieldDoctorName;
+    private JButton buttonDelete;
+    private JButton buttonHome;
 
     private DefaultTableModel dtm ;
     private JTable table;
     public ClinicFrame() {
         this.setBounds(150,140,700,600);
         this.getContentPane().add(panel1);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         String[] columns = {"id", "name", "Doctor", "specialty", "address", "phone", "mobile", "email"};
         dtm = new DefaultTableModel(null, columns);
@@ -41,8 +46,23 @@ public class ClinicFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
         panel1.add(scrollPane);
         buttonSave.addActionListener(e->{ save(); });
+        buttonDelete.addActionListener(e->{ delete(); });
+        buttonHome.addActionListener(e->{
+            showMain();
+            this.setVisible(false); // hide clinicFrame
+        });
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                showMain();
+            }
+        });
     }
-
+    private void showMain(){
+        Main m = new Main();
+        m.pack();
+        m.setVisible(true);
+    }
 
     private void save(){
         // validation
@@ -75,6 +95,26 @@ public class ClinicFrame extends JFrame {
 
     }
 
+    private void delete(){
+        // validation
+
+        // save data
+
+        try {
+            int rowNum =table.getSelectedRow();
+            int id = Integer.parseInt(((String) dtm.getValueAt(rowNum , 0)));
+            Connection cn  =DBConfig.createConnection();
+            ClinicDAO clinicDAO = new ClinicDAO(cn);
+            clinicDAO.delete(id); // delete from DB
+            cn.close();
+            dtm.removeRow(rowNum); // delete from table
+            JOptionPane.showMessageDialog(this ,"Clinic Deleted Successfully");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void fillTable(){
         dtm.setRowCount(0);
         try {
@@ -99,7 +139,7 @@ public class ClinicFrame extends JFrame {
             throw new RuntimeException(e);
         }
 
-
-
     }
+
+
 }
