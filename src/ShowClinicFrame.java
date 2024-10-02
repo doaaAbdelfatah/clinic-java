@@ -50,7 +50,7 @@ public class ShowClinicFrame extends JFrame {
         panelNorth.add(buttonAppointment);
         panelNorth.add(buttonShowAllAppointment);
 
-        AddPatientPanel panel1 = new AddPatientPanel();
+        PatientForm panel1 = new PatientForm();
         ShowAllPatientPanel panel2 = new ShowAllPatientPanel();
         AppointmentPanel panel3 = new AppointmentPanel();
         ShowAllAppointmentPanel panel4 = new ShowAllAppointmentPanel();
@@ -83,17 +83,7 @@ public class ShowClinicFrame extends JFrame {
 
     }
 
-    class AddPatientPanel extends JPanel{
 
-        public AddPatientPanel() {
-
-            PatientForm patientForm = new PatientForm();
-            this.add(patientForm);
-//            name, gender, birth_date, address, phone, mobile, email, disease, medical_diagnosis
-
-
-        }
-    }
 
     class ShowAllPatientPanel extends JPanel{
 
