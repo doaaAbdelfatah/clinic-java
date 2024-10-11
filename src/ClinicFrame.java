@@ -1,5 +1,6 @@
 import db.Clinic;
 import db.DBConfig;
+import db.User;
 import db.dao.ClinicDAO;
 
 import javax.swing.*;
@@ -29,7 +30,9 @@ public class ClinicFrame extends JFrame {
 
     private DefaultTableModel dtm ;
     private JTable table;
-    public ClinicFrame() {
+    private User user;
+    public ClinicFrame(User user) {
+        this.user=user;
         this.setBounds(150,140,700,600);
         this.getContentPane().add(panel1);
 //        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +62,7 @@ public class ClinicFrame extends JFrame {
         });
     }
     private void showMain(){
-        Main m = new Main();
+        Main m = new Main(user);
         m.pack();
         m.setVisible(true);
     }

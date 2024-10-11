@@ -5,9 +5,12 @@ public class Patient {
     private int id;
     private String name ,address, phone, mobile, email, disease, medicalDiagnosis;
 
-    private enum gender{male ,female};
+    public enum GENDER {male ,female};
+
+    private GENDER gender;
     private Date  birthDate ,createdAt;
     private User user ;
+    private Clinic clinic ;
 
     public Patient() {
     }
@@ -98,5 +101,26 @@ public class Patient {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public GENDER getGender() {
+        return gender;
+    }
+
+    public void setGender(GENDER gender) {
+        this.gender = gender;
+    }
+
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

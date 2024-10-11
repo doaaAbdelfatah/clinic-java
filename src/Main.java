@@ -1,5 +1,6 @@
 import db.Clinic;
 import db.DBConfig;
+import db.User;
 import db.dao.ClinicDAO;
 
 import javax.swing.*;
@@ -9,7 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Main extends JFrame {
-    public Main(){
+    private User user;
+    public Main(User user){
+        this.user=user;
         setTitle("clinics program");
         setLocation(350,250);
 //        setBounds(350,250,500,300);
@@ -21,7 +24,7 @@ public class Main extends JFrame {
         JMenuItem menuItemClinic = new JMenuItem("Manage Clinics");
         menuManage.add(menuItemClinic);
         menuItemClinic.addActionListener(e->{
-            ClinicFrame clinicFrame = new ClinicFrame();
+            ClinicFrame clinicFrame = new ClinicFrame(user);
             clinicFrame.setVisible(true);
             this.setVisible(false); // Hide Main
         });
@@ -41,7 +44,7 @@ public class Main extends JFrame {
                 button.setFont(new Font("Arial" ,Font.BOLD ,16));
                 panelFlow.add(button);
                 button.addActionListener(e->{
-                    new ShowClinicFrame(clinic).setVisible(true);
+                    new ShowClinicFrame(clinic ,user).setVisible(true);
                     this.setVisible(false);
                 });
             }
@@ -50,9 +53,5 @@ public class Main extends JFrame {
             throw new RuntimeException(e);
         }
     }
-    public static void main(String[] args) {
-        Main main = new Main();
-        main.pack();
-        main.setVisible(true);
-    }
+
 }

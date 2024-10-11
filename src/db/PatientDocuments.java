@@ -1,13 +1,29 @@
 package db;
+
 import java.util.Date;
-public class PatientDocument {
+
+public class PatientDocuments {
     private int id;
     private String name, file, result, comments;
-    private enum type {radiology, labtest ,others};
-    private Date createdAt;
-    private  Patient patient;
 
-    public PatientDocument() {
+    public void setVisible(boolean b) {
+
+    }
+
+
+    private Date createdAt;
+    private Patient patient;
+private  String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public PatientDocuments() {
     }
 
     public int getId() {

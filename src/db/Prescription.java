@@ -3,7 +3,7 @@ package db;
 public class Prescription {
     private int id;
     private String medicineName, dosage, duration;
-    private User users;
+    private Patient patient;
 
     public Prescription() {
     }
@@ -41,11 +41,11 @@ public class Prescription {
         this.duration = duration;
     }
 
-    public User getUsers() {
-        return users;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setUsers(User users) {
-        this.users = users;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
