@@ -36,7 +36,7 @@ public class PrescriptionFrame extends JPanel {
         setLayout(new BorderLayout());
         this.add(panel1);
 
-        String[] columns = {"id", "medicine_name", "dosage", "duration", "user_id"};
+        String[] columns = {"id", "medicine_name", "dosage", "duration", "Patient"};
         dtm = new DefaultTableModel(null, columns);
         table = new JTable(dtm);
         Font font = new Font("Arial", Font.PLAIN, 20);
@@ -78,7 +78,7 @@ public class PrescriptionFrame extends JPanel {
             Connection pr = DBConfig.createConnection();
             PrescriptionDAO prescriptionDao = new PrescriptionDAO(pr);
 
-            ArrayList<Prescription> prescriptions = prescriptionDao.get();
+            ArrayList<Prescription> prescriptions = prescriptionDao.getByPId(patient.getId());
             for (Prescription prescription : prescriptions) {
                 String[] row = {
                         String.valueOf(prescription.getId()),

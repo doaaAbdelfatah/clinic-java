@@ -111,7 +111,7 @@ public class PatientDocumentsDao {
             pd.setId(resultSet.getInt("id"));
             pd.setName(resultSet.getString("name"));
             pd.setFile(resultSet.getString("file"));
-            //pd.setType(resultSet.getString("type"));
+            pd.setType(resultSet.getString("type"));
             pd.setResult(resultSet.getString("result"));
             pd.setComments(resultSet.getString("comments"));
             pd.setCreatedAt(resultSet.getDate("created_at"));

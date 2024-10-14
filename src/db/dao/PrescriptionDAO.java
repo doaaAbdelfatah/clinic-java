@@ -89,4 +89,24 @@ public class PrescriptionDAO {
         }
         return list;
     }
+
+    public ArrayList<Prescription> getByPId(int pid) throws SQLException {
+        String sql = "select id,medicine_name,dosage,duration,patient_id from prescriptions where patient_id=?";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1,pid);
+        ArrayList<Prescription> list = new ArrayList<>();
+        ResultSet resultSet = st.executeQuery();
+        while (resultSet.next()) {
+            Prescription pr = new Prescription();
+            pr.setId(resultSet.getInt("id"));
+            pr.setMedicineName(resultSet.getString("Medicine_Name"));
+            pr.setDosage(resultSet.getString("Dosage"));
+            pr.setDuration(resultSet.getString("Duration"));
+            PatientDAO patientDao=new PatientDAO(connection);
+            Patient patient= patientDao.get(resultSet.getInt("patient_id"));
+            pr.setPatient(patient);
+            list.add(pr);
+        }
+        return list;
+    }
 }

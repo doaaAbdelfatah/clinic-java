@@ -43,7 +43,7 @@ public class PatientDocuments extends JPanel {
 
         //id, name, file, type, result, comments, created_at, patient_id
 
-        String[] columns = {"id", "name", "file", "type", "result", "comments", " created_at", " patient_id"};
+        String[] columns = {"id", "name", "file", "type", "result", "comments", " created_at", " patient"};
         dtm = new DefaultTableModel(null, columns);
         table = new JTable(dtm);
         Font font = new Font("Arial", Font.PLAIN, 20);
@@ -91,13 +91,14 @@ e.printStackTrace();
 
                     for (db.PatientDocuments document : documentsList) {
                         String[] row = {
-                              //  document.getId();
+                                document.getId()+"",
                                 document.getName(),
                                 document.getFile(),
-                              //  document.getType(),
+                                document.getType(),
                                 document.getResult(),
                                 document.getComments(),
                                 document.getCreatedAt().toString(),
+                                document.getPatient().getName()
 
                         };
                         dtm.addRow(row);
